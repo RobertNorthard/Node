@@ -1,4 +1,4 @@
 Node
 ====
 
-Node.js
+A repository that contains basic programs I have created using Node.js.
