@@ -4,6 +4,7 @@
  */
 var net = require('net');
 
+//array of connected clients
 var clients = [];
 
 function Client(stream) {
