@@ -11,28 +11,29 @@ function Client(stream) {
     var name = null;
     var stream = stream;
 
-    this.setName = function (name) {
-        this.name = name;
-    }
-
-    this.getName = function () {
-        return this.name;
-    }
-
    this.getInfo = function () {
-        return this.stream.remoteAddress + ":" + this.stream.remotePort;
+        return stream.remoteAddress + ":" + stream.remotePort;
     }
 
     this.write = function (message) {
-        this.stream.write(message);
+        stream.write(message);
     }
+
+
+    this.__defineSetter__('name', function (value) {
+        name = value;
+    });
+
+    this.__defineGetter__('name', function () {
+        return name;
+    });
 }
 
 function broadcast(message, sender) {
     clients.forEach(function (client) {
 
-        if (client === sender) return;
-        client.write(sender.getName() + ":" + message);
+        if (client.name === sender.name) return;
+        client.write(sender.name + ":" + message);
     })
 }
 
@@ -66,7 +67,7 @@ var server = net.createServer(function (socket) {
     socket.on("data", function (data) {
         if (client.name == null)
         //remove \r\n
-            client.setName(data.toString().substr(0, data.length - 1));
+            client.name = (data.toString().substr(0, data.length - 1));
         else
             broadcast(data, client);
     });
