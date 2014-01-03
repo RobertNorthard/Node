@@ -23,7 +23,7 @@ function Client(stream) {
         return this.stream.remoteAddress + ":" + this.stream.remotePort;
     }
 
-    this.prototype.write = function (message) {
+    this.write = function (message) {
         this.stream.write(message);
     }
 }
