@@ -13,20 +13,20 @@ function Client(stream) {
 
     this.setName = function (name) {
         this.name = name;
-    };
+    }
 
     this.getName = function () {
         return this.name;
-    };
+    }
 
    this.getInfo = function () {
         return this.stream.remoteAddress + ":" + this.stream.remotePort;
-    };
+    }
 
     this.prototype.write = function (message) {
         this.stream.write(message);
     }
-};
+}
 
 function broadcast(message, sender) {
     clients.forEach(function (client) {
