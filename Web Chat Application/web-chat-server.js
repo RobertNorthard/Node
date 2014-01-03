@@ -4,25 +4,26 @@
  */
 var net = require('net');
 
+//array of connected clients
 var clients = [];
 
 function Client(stream) {
-    this.name = null;
-    this.stream = stream;
+    var name = null;
+    var stream = stream;
 
-    Client.prototype.setName = function (name) {
+    this.setName = function (name) {
         this.name = name;
     };
 
-    Client.prototype.getName = function () {
+    this.getName = function () {
         return this.name;
     };
 
-    Client.prototype.getInfo = function () {
+   this.getInfo = function () {
         return this.stream.remoteAddress + ":" + this.stream.remotePort;
     };
 
-    Client.prototype.write = function (message) {
+    this.prototype.write = function (message) {
         this.stream.write(message);
     }
 };
@@ -39,9 +40,9 @@ function broadcast(message, sender) {
 function getDateTime() {
 
     var date = new Date();
-
     return getAsString(date.getDate()) + ":" + getAsString(date.getMonth() + 1) + ":" +
-        getAsString(date.getFullYear()) + ":" + getAsString(date.getHours()) + ":" + getAsString(date.getMinutes()) + ":" + getAsString(date.getSeconds());
+            getAsString(date.getFullYear()) + ":" + getAsString(date.getHours()) + ":" 
+        + getAsString(date.getMinutes()) + ":" + getAsString(date.getSeconds());
 }
 
 function getAsString(data) {
